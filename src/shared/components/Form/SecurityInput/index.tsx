@@ -32,6 +32,7 @@ const SecurityInput: React.FC<InputProps> = ({ name, children, ...rest }) => {
         {visible ? <AiFillEyeInvisible size={23} /> : <MdVisibility size={23} />}
       </button>
       <InputField
+        className={error ? 'error' : ''}
         isIcon={!!children}
         ref={inputRef}
         id={fieldName}

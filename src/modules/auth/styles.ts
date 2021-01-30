@@ -52,9 +52,16 @@ export const Division = styled.div`
   flex-direction: column;
 `
 
+export const Logo = styled.img`
+  width: auto;
+  height: auto;
+  max-width: 179px;
+  margin-bottom: 15px;
+`
+
 export const Form = styled(FormWeb)`
   width: 100%;
-  padding: 20px 30px 0px 30px;
+  padding: 0px 30px;
 `
 
 export const Submit = styled.button`
@@ -110,4 +117,34 @@ export const Link = styled(LinkRouter)`
     /* color: ${props => props.theme.colors.secondary}; */
     text-decoration: underline;
   }
+`
+
+const Notification = styled.span`
+  width: 100%;
+  height: 30px;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${props => props.theme.colors.primary};
+  margin-bottom: 10px;
+
+  p {
+    line-height: 20px;
+    margin-left: 5px;
+  }
+`
+
+export const Error = styled(Notification)`
+  color: ${props => props.theme.colors.primary};
+`
+
+export const Success = styled(Notification)`
+  color: #1dbf69;
+`
+
+export const BannerLogin = styled.img`
+  width: auto;
+  height: auto;
+  max-width: 350px;
 `

@@ -23,6 +23,7 @@ const Input: React.FC<InputProps> = ({ name, children, ...rest }) => {
     <Container>
       <div className="icon">{children}</div>
       <InputField
+        className={error ? 'error' : ''}
         isIcon={!!children}
         ref={inputRef}
         id={fieldName}

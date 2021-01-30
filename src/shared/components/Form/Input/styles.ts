@@ -13,23 +13,6 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
   }
-
-  .visible {
-    position: absolute;
-    right: 10px;
-    height: 45px;
-    color: ${props => props.theme.colors.secondary};
-    display: flex;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 5;
-
-    &:focus {
-      outline: none;
-    }
-  }
 `
 
 interface Props {
@@ -40,9 +23,7 @@ export const InputField = styled.input<Props>`
   height: 45px;
   width: 100%;
   padding: 10px;
-  margin-bottom: 5px;
   padding-left: ${props => (props.isIcon ? '40px' : '10px')};
-  padding-right: 40px;
   background-color: transparent;
   border: 2px solid ${props => props.theme.colors.placeholder};
   font-size: 14px;
@@ -71,8 +52,13 @@ export const InputField = styled.input<Props>`
     transform: scale(1.01);
     border: 2px solid ${props => props.theme.colors.secondary};
   }
+
+  &.error {
+    border: 2px solid ${props => props.theme.colors.primary};
+  }
 `
 
 export const Error = styled.span`
-  color: #f2c7a8;
+  color: ${props => props.theme.colors.primary};
+  font-size: 13px;
 `
