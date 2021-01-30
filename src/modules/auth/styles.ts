@@ -118,29 +118,29 @@ export const Link = styled(LinkRouter)`
     text-decoration: underline;
   }
 `
+interface PropsNotification {
+  type: keyof { error: string; success: string; info: string }
+}
 
-const Notification = styled.span`
+export const Notification = styled.span<PropsNotification>`
   width: 100%;
   height: 30px;
   padding: 20px 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${props => props.theme.colors.primary};
+  color: ${props =>
+    props.type === 'error'
+      ? props.theme.colors.primary
+      : props.type === 'success'
+      ? '#1dbf69'
+      : '#bfbe1d'};
   margin-bottom: 10px;
 
   p {
     line-height: 20px;
     margin-left: 5px;
   }
-`
-
-export const Error = styled(Notification)`
-  color: ${props => props.theme.colors.primary};
-`
-
-export const Success = styled(Notification)`
-  color: #1dbf69;
 `
 
 export const BannerLogin = styled.img`

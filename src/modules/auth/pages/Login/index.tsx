@@ -12,22 +12,23 @@ import {
   OtherOption,
   Link,
   Form,
-  Success,
+  Notification,
   Logo,
   BannerLogin
 } from '../../styles'
 import Input from '../../../../shared/components/Form/Input'
+import Checkbox from '../../../../shared/components/Form/Checkbox'
+import SecurityInput from '../../../../shared/components/Form/SecurityInput'
 
 import LogoImage from '../../../../assets/images/logo.png'
 import BannerLoginImage from '../../../../assets/images/banner-login.svg'
-import SecurityInput from '../../../../shared/components/Form/SecurityInput'
-import Checkbox from '../../../../shared/components/Form/Checkbox'
 import { useLocation } from 'react-router-dom'
+import { useAuth } from '../../contexts/auth'
 
 interface PropsForm {
   username: string
   password: string
-  authorized: boolean
+  remember: boolean
 }
 
 interface LocationState {
@@ -38,19 +39,48 @@ interface LocationState {
   success?: boolean
 }
 
+interface PropsAlert {
+  msg: string
+  type: keyof { error: string; success: string; info: string }
+}
+
 const Login: React.FC = () => {
   const formRef = useRef(null)
+  const { singIn } = useAuth()
   const location = useLocation<LocationState>()
-  const [msg, setMsg] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [alert, setAlert] = useState<PropsAlert>({ type: 'info', msg: '' })
 
-  function handleSubmit(event: PropsForm) {
-    console.log(event)
+  async function handleSubmit(dataForm: PropsForm) {
+    setLoading(true)
+    const codes = {
+      401: 'Erro ao realizar o login.',
+      404: 'Usuário/Senha incorretos.',
+      200: true
+    }
+
+    const result = await singIn(
+      dataForm.username,
+      dataForm.password,
+      dataForm.remember
+    )
+    setAlert({
+      type: 'error',
+      msg: result === 401 || result === 404 ? codes[result] : ''
+    })
+    setLoading(false)
   }
 
   useEffect(() => {
     const { success } = location.state ? location.state : { success: false }
+
     if (success) {
-      setMsg('Cadastro Realizado com sucesso.')
+      setAlert({ type: 'success', msg: 'Cadastro Realizado com sucesso.' })
+    }
+
+    return () => {
+      setAlert({ type: 'info', msg: '' })
+      setLoading(false)
     }
   }, [location])
 
@@ -61,11 +91,11 @@ const Login: React.FC = () => {
       </Card>
       <Main>
         <Division>
-          {msg && (
-            <Success>
+          {alert.msg && (
+            <Notification type={alert.type}>
               <GiConfirmed size={20} />
-              <p>{msg}</p>
-            </Success>
+              <p>{alert.msg}</p>
+            </Notification>
           )}
           <Logo src={LogoImage} alt="Logo" />
           <Form onSubmit={handleSubmit} ref={formRef}>
@@ -75,8 +105,8 @@ const Login: React.FC = () => {
             <SecurityInput name="password" placeholder="Senha" required>
               <FaLock />
             </SecurityInput>
-            <Checkbox name="authorized" label="Lembrar de mim." />
-            <Submit>Entrar</Submit>
+            <Checkbox name="remember" label="Lembrar de mim." />
+            <Submit>{loading ? 'Carregando...' : 'Entrar'}</Submit>
           </Form>
           <OtherOption>
             <p>Não possui conta ?</p>

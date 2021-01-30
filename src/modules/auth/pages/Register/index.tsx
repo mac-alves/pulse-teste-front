@@ -13,7 +13,7 @@ import {
   OtherOption,
   Link,
   Form,
-  Error,
+  Notification,
   Logo, BannerLogin
 } from '../../styles'
 import Input from '../../../../shared/components/Form/Input'
@@ -102,7 +102,11 @@ const Register: React.FC = () => {
           <BannerLogin src={BannerRegisterImage} alt="Banner Login" />
         </Division>
         <Division>
-          {error && (<Error><BiError size={20}/><p>{error}</p></Error>)}
+          {error && (
+            <Notification type="error">
+              <BiError size={20}/><p>{error}</p>
+            </Notification>
+          )}
           <Logo src={LogoImage} alt="Logo" />
           <Form onSubmit={handleSubmit} ref={formRef}>
             <Input name="username" placeholder="Usuário" type="text" required>
