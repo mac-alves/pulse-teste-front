@@ -127,7 +127,7 @@ const Register: React.FC = () => {
           </Form>
           <OtherOption>
             <p>Já possui conta ?</p>
-            <Link to={AuthRoutes.LOGIN}>Fazer Login.</Link>
+            <Link to={AuthRoutes.LOGIN}>Login.</Link>
           </OtherOption>
         </Division>
       </Main>

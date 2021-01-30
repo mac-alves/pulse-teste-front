@@ -30,6 +30,7 @@ export const InputField = styled.input<Props>`
   color: ${props => props.theme.colors.secondary};
   transition: all 0.3s linear;
   border-radius: 7px;
+  -moz-appearance: textfield;
 
   ::-webkit-input-placeholder {
     color: ${props => props.theme.colors.placeholder};
@@ -45,6 +46,11 @@ export const InputField = styled.input<Props>`
 
   :-ms-input-placeholder {
     color: ${props => props.theme.colors.placeholder};
+  }
+
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    display: none;
   }
 
   &:focus {

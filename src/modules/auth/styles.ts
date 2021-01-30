@@ -8,7 +8,7 @@ export const Container = styled.div`
 
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 0px 30px 30px 30px;
+  border-radius: 30px;
 `
 
 export const Content = styled.div`
@@ -22,7 +22,7 @@ export const Card = styled.div`
   height: 40px;
 
   background: ${props => props.theme.colors.primary};
-  border-radius: 0px 0px 30px 0px;
+  border-radius: 30px 0px 30px 0px;
 
   display: flex;
   justify-content: flex-start;
