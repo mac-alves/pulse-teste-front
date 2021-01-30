@@ -6,14 +6,17 @@ import AuthRoutes from './paths.routes'
 import Login from './pages/Login'
 import Register from './pages/Register'
 
-// import { Container } from './styles';
+import { Container } from './styles'
+
 const AuthModule: React.FC = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path={AuthRoutes.LOGIN} component={Login} />
-        <Route exact path={AuthRoutes.REGISTER} component={Register} />
-      </Switch>
+      <Container>
+        <Switch>
+          <Route exact path={AuthRoutes.LOGIN} component={Login} />
+          <Route exact path={AuthRoutes.REGISTER} component={Register} />
+        </Switch>
+      </Container>
     </BrowserRouter>
   )
 }

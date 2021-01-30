@@ -8,7 +8,18 @@ export default createGlobalStyle`
     list-style: none;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   body {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
     background: ${props => props.theme.colors.backgroundColor};
     color: ${props => props.theme.colors.text};
     font: 400 16px 'Poppins', sans-serif;
