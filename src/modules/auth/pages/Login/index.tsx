@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import AuthRoutes from '../../paths.routes'
+import { FaUser, FaLock } from 'react-icons/fa'
 
 import {
   Content,
@@ -8,14 +9,30 @@ import {
   Division,
   Submit,
   OtherOption,
-  Link
+  Link,
+  Form
 } from '../../styles'
-import { Logo, Form, Input, BannerLogin } from './styles'
+import { Logo, BannerLogin } from './styles'
+import Input from '../../../../components/Form/Input'
 
 import LogoImage from '../../../../assets/images/logo.png'
 import BannerLoginImage from '../../../../assets/images/banner-login.svg'
+import SecurityInput from '../../../../components/Form/SecurityInput'
+import Checkbox from '../../../../components/Form/Checkbox'
+
+interface PropsForm {
+  username: string
+  password: string
+  authorized: boolean
+}
 
 const Login: React.FC = () => {
+  const formRef = useRef(null)
+
+  function handleSubmit(event: PropsForm) {
+    console.log(event)
+  }
+
   return (
     <Content>
       <Card>
@@ -24,14 +41,14 @@ const Login: React.FC = () => {
       <Main>
         <Division>
           <Logo src={LogoImage} alt="Logo" />
-          <Form>
-            <Input name="username" placeholder="Usuário" type="text" required />
-            <Input
-              name="password"
-              placeholder="Senha"
-              type="password"
-              required
-            />
+          <Form onSubmit={handleSubmit} ref={formRef}>
+            <Input name="username" placeholder="Usuário" type="text" required>
+              <FaUser />
+            </Input>
+            <SecurityInput name="password" placeholder="Senha" required>
+              <FaLock />
+            </SecurityInput>
+            <Checkbox name="authorized" label="Lembrar de mim." />
             <Submit>Entrar</Submit>
           </Form>
           <OtherOption>

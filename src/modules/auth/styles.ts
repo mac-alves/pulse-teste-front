@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Link as LinkRouter } from 'react-router-dom'
+import { Form as FormWeb } from '@unform/web'
 
 export const Container = styled.div`
   width: 833px;
@@ -9,6 +10,7 @@ export const Container = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 30px 30px 30px;
 `
+
 export const Content = styled.div`
   width: 100%;
   height: 100%;
@@ -48,6 +50,11 @@ export const Division = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`
+
+export const Form = styled(FormWeb)`
+  width: 100%;
+  padding: 20px 30px 0px 30px;
 `
 
 export const Submit = styled.button`
