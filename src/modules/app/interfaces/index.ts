@@ -1,4 +1,5 @@
 export interface Person {
+  id?: string
   img: string | ArrayBuffer | null
   name: string
   uf: string

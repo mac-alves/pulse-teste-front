@@ -22,10 +22,11 @@ import SecurityInput from '../../../../shared/components/Form/SecurityInput'
 
 import LogoImage from '../../../../assets/images/logo.png'
 import BannerLoginImage from '../../../../assets/images/banner-login.svg'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/auth'
 import { LocationState, PropsAlert } from '../../../../shared/interfaces'
 import { queryParamsToJson, strToBool } from '../../../../shared/utils'
+import AppRoutes from '../../../app/paths.routes'
 
 interface PropsForm {
   username: string
@@ -35,6 +36,7 @@ interface PropsForm {
 
 const Login: React.FC = () => {
   const formRef = useRef(null)
+  const history = useHistory()
   const { singIn } = useAuth()
   const location = useLocation<LocationState>()
   const [loading, setLoading] = useState(false)
@@ -58,6 +60,7 @@ const Login: React.FC = () => {
       msg: result === 401 || result === 404 ? codes[result] : ''
     })
     setLoading(false)
+    history.replace(AppRoutes.HOME)
   }
 
   useEffect(() => {

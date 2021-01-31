@@ -46,6 +46,9 @@ const Select: React.FC<Props> = ({ name, flex, ...rest }) => {
         }
 
         return ref.state.value.value
+      },
+      setValue(_: any, value: string) {
+        ;(selectRef as any).current.state.value = { value }
       }
     })
   }, [fieldName, registerField, rest.isMulti])

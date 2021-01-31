@@ -1,7 +1,8 @@
 const AppRoutes = {
   HOME: '/',
   PERSON: {
-    create: '/person/new',
+    initial: '/person',
+    create: '/new-person',
     edite: '/person/:id'
   }
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-export const Table = styled.div`
+export const Container = styled.div`
   width: calc(100% - 100px);
 `
 
@@ -102,22 +102,10 @@ export const Body = styled.table`
   }
 `
 
-export const ImageUser = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fffbfb;
-  border: 1px solid #d9effc;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: ${props => props.theme.colors.placeholder};
-`
-
 export const TableFooter = styled.div`
   height: 45px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 `
 

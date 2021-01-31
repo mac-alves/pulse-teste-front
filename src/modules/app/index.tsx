@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import AppRoutes from './paths.routes'
 
-import Home from './pages/Home'
-import Create from './pages/Create'
+import HomeApp from './pages/Home'
+import FormApp from './pages/Form'
 
 import { Container } from './styles'
 import { PersonProvider } from './contexts/person'
@@ -15,8 +15,9 @@ const AppModule: React.FC = () => {
       <Container>
         <Switch>
           <PersonProvider>
-            <Route exact path={AppRoutes.HOME} component={Home} />
-            <Route path={AppRoutes.PERSON.create} component={Create} />
+            <Route exact path={AppRoutes.HOME} component={HomeApp} />
+            <Route exact path={AppRoutes.PERSON.edite} component={FormApp} />
+            <Route exact path={AppRoutes.PERSON.create} component={FormApp} />
           </PersonProvider>
         </Switch>
       </Container>

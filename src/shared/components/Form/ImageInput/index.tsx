@@ -22,7 +22,7 @@ type InputProps = JSX.IntrinsicElements['input'] & Props
 const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const { fieldName, registerField, error } = useField(name)
-  const [preview, setPreview] = useState<any>(UserImg)
+  const [preview, setPreview] = useState<string | undefined>(UserImg)
   const [classAnimate, setClassAnimate] = useState('')
 
   function animateImg() {
@@ -38,7 +38,7 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
       const file = e.target.files?.[0]
 
       if (!file) {
-        setPreview(null)
+        setPreview(undefined)
       }
 
       const previewURL = URL.createObjectURL(file)
@@ -46,17 +46,45 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
     }
   }, [])
 
+  const dataURLtoFile = (dataURL: string) => {
+    const arr = dataURL.split(',')
+    const toMime = arr[0].match(/:(.*?);/)
+    const mime = toMime ? toMime[1] : 'image/png'
+    const bstr = atob(arr[1])
+    let n = bstr.length
+    const u8arr = new Uint8Array(n)
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n)
+    }
+
+    return new File([u8arr], 'user-image', { type: mime })
+  }
+
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'files[0]',
+      getValue: (ref: any) => {
+        if (ref.files.length > 0) {
+          return ref.files[0]
+        }
+        console.log('preview', preview)
+
+        if (preview && preview.search('data:') !== -1) {
+          return dataURLtoFile(preview)
+        }
+
+        return null
+      },
       clearValue(ref: HTMLInputElement) {
         ref.value = ''
-        setPreview(null)
+        setPreview(preview)
       },
       setValue(_: HTMLInputElement, value: string) {
-        setPreview(value)
+        if (value) {
+          setPreview(value)
+        }
       }
     })
   }, [fieldName, registerField])

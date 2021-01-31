@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { OptionTypeBase } from 'react-select'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { RiUserShared2Line } from 'react-icons/ri'
 import { BiError } from 'react-icons/bi'
 import { IoMdArrowBack } from 'react-icons/io'
@@ -11,7 +11,14 @@ import Input from '../../../../shared/components/Form/Input'
 import Select from '../../../../shared/components/Form/Select'
 import { Notification } from '../../../../shared/styles/components'
 import { Content, Card, Main, Image, Title } from '../../styles'
-import { Back, Form, Files, Fields, Submit, Group } from './styles'
+import {
+  Back,
+  Form as FormPerson,
+  Files,
+  Fields,
+  Submit,
+  Group
+} from './styles'
 import LogoImage from '../../../../assets/images/logo.png'
 import ImageInput from '../../../../shared/components/Form/ImageInput'
 
@@ -20,6 +27,8 @@ import { CustomErrorRequest } from '../../../../shared/errors'
 import { usePerson } from '../../contexts/person'
 import AuthRoutes from '../../../auth/paths.routes'
 import AppRoutes from '../../paths.routes'
+import { Params } from '../../../../shared/utils'
+import { Person } from '../../interfaces'
 
 interface FormFields {
   img: File | undefined
@@ -37,18 +46,21 @@ const roles: OptionTypeBase[] = [
   { value: 'Estagiário', label: 'Estagiário' }
 ]
 
-const Create: React.FC = () => {
+const Form: React.FC = () => {
+  const { id } = useParams<Params>()
+
   const formRef = useRef(null)
-  const { singOut } = useAuth()
-  const { setNewPerson } = usePerson()
   const history = useHistory()
+  const { singOut } = useAuth()
+  const { savePerson, getPerson } = usePerson()
   const [loading, setLoading] = useState(false)
   const [error, setErro] = useState('')
 
   const [ufs, setUfs] = useState<OptionTypeBase[]>([])
-  const [selectedUf, setSelectedUf] = useState<string>('')
   const [cities, setCities] = useState<OptionTypeBase[]>([])
+  const [selectedUf, setSelectedUf] = useState<OptionTypeBase | null>()
   const [selectedCity, setSelectedCity] = useState<OptionTypeBase | null>()
+  const [selectedRole, setSelectedRole] = useState<OptionTypeBase | null>()
 
   const toBase64 = (file: File) =>
     new Promise<string | ArrayBuffer | null>((resolve, reject) => {
@@ -66,8 +78,6 @@ const Create: React.FC = () => {
       ...data,
       age: Number(data.age)
     }
-
-    console.log(dataForm)
 
     try {
       const schema = Yup.object().shape({
@@ -93,9 +103,7 @@ const Create: React.FC = () => {
         image = await toBase64(dataForm.img)
       }
 
-      console.log(typeof image)
-
-      const code = await setNewPerson({
+      const code = await savePerson(id, {
         name: dataForm.name,
         age: dataForm.age,
         uf: dataForm.uf,
@@ -103,10 +111,9 @@ const Create: React.FC = () => {
         role: dataForm.role,
         img: image
       })
-      console.log(code)
 
       if (code === 401) {
-        throw new CustomErrorRequest('Erro ao cadastrar pessoa')
+        throw new CustomErrorRequest('Erro ao salvar pessoa')
       }
 
       setLoading(false)
@@ -138,39 +145,50 @@ const Create: React.FC = () => {
   }
 
   const getUfs = useCallback(async () => {
-    const ufs = await Axios.get(
-      'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
-    )
+    try {
+      const ufs = await Axios.get(
+        'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+      )
 
-    setUfs(
-      ufs.data.map((uf: any) => {
-        return {
-          value: uf.sigla,
-          label: uf.sigla
-        }
-      })
-    )
+      setUfs(
+        ufs.data.map((uf: any) => {
+          return {
+            value: uf.sigla,
+            label: uf.sigla
+          }
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
   const getCity = useCallback(async () => {
-    const response = await Axios.get(
-      `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
-    )
+    if (selectedUf) {
+      try {
+        const response = await Axios.get(
+          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf.value}/municipios`
+        )
 
-    setCities(
-      response.data.map((city: any) => {
-        return {
-          value: city.nome,
-          label: city.nome
-        }
-      })
-    )
+        setCities(
+          response.data.map((city: any) => {
+            return {
+              value: city.nome,
+              label: city.nome
+            }
+          })
+        )
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }, [selectedUf])
 
   const handleSelectUf = (item: OptionTypeBase | null) => {
     if (item) {
-      setSelectedUf(item.value)
+      setSelectedUf(item)
       setSelectedCity(null)
+
       if (formRef.current) {
         // eslint-disable-next-line prettier/prettier
         (formRef as any).current.getFieldRef('city').state.value = null
@@ -183,23 +201,48 @@ const Create: React.FC = () => {
     history.replace(AuthRoutes.LOGIN)
   }
 
+  const setPersonToEdit = (person: Person | null) => {
+    if (person) {
+      setSelectedUf({ value: person.uf, label: person.uf })
+      setSelectedCity({ value: person.city, label: person.city })
+      setSelectedRole({ value: person.role, label: person.role })
+      ;(formRef as any).current.setData({
+        name: person.name,
+        age: person.age,
+        uf: person.uf,
+        city: person.city,
+        role: person.role,
+        img: person.img
+      })
+    }
+  }
+
   useEffect(() => {
     getUfs()
   }, [getUfs])
 
   useEffect(() => {
-    if (selectedUf !== '') {
+    if (selectedUf) {
       getCity()
     }
   }, [getCity, selectedUf])
 
+  useEffect(() => {
+    if (id) {
+      ;(async () => {
+        const person = await getPerson(id)
+        setPersonToEdit(person)
+      })()
+    }
+  }, [id])
+
   return (
     <Content>
       <Card position="topLeft">
-        <p>Cadastro</p>
+        <p>{id ? 'Edição' : 'Cadastro'}</p>
       </Card>
       <Back>
-        <button onClick={() => history.goBack()}>
+        <button onClick={() => history.replace(AppRoutes.HOME)}>
           <p>
             <IoMdArrowBack /> Voltar
           </p>
@@ -218,8 +261,8 @@ const Create: React.FC = () => {
           alt="Logo"
           onClick={() => history.push(AppRoutes.HOME)}
         />
-        <Title>Cadastro de Pessoas</Title>
-        <Form onSubmit={handleSubmit} ref={formRef}>
+        <Title>{id ? 'Edição' : 'Cadastro'} de Pessoas</Title>
+        <FormPerson onSubmit={handleSubmit} ref={formRef}>
           <Files>
             <ImageInput name="img" accept="image/png, image/jpeg, image/jpg" />
           </Files>
@@ -231,6 +274,7 @@ const Create: React.FC = () => {
                 placeholder="UF"
                 options={ufs}
                 name="uf"
+                value={selectedUf}
                 onChange={item => handleSelectUf(item)}
               />
               <Select
@@ -246,10 +290,12 @@ const Create: React.FC = () => {
               options={roles}
               placeholder="Selecione um cargo"
               name="role"
+              value={selectedRole}
+              onChange={item => setSelectedRole(item)}
             />
             <Submit>{loading ? 'Carregando...' : 'Salvar'}</Submit>
           </Fields>
-        </Form>
+        </FormPerson>
         {error && (
           <Notification type="error">
             <BiError size={20} />
@@ -261,4 +307,4 @@ const Create: React.FC = () => {
   )
 }
 
-export default Create
+export default Form

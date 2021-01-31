@@ -40,32 +40,32 @@ build: usado quando se realiza alguma modificação em arquivos de build e depen
 [x] - 5. Ao finalizar o cadastro, o usuário deve retornar para a página de login
    novamente;
 
-[] - 6. O usuário logado, ao entrar na home, deve poder ver a lista de pessoas
+[x] - 6. O usuário logado, ao entrar na home, deve poder ver a lista de pessoas
    cadastradas, uma opção de deslogar e o ícone do Mateus;
 
-[] - 7. Cada card da lista, deve ter as opções de excluir e editar conforme layout;
+[x] - 7. Cada card da lista, deve ter as opções de excluir e editar conforme layout;
 
-[] - 8. A listagem de usuário deve possuir um scroll;
+[x] - 8. A listagem de usuário deve possuir um scroll (FEITO A PAGINAÇÃO);
 
-[] - 9. Na tela de home, ao clicar em um card de uma pessoa, redirecionar para a
+[x] - 9. Na tela de home, ao clicar em um card de uma pessoa, redirecionar para a
    página de edição, juntamente com os dados;
 
-[] - 10. A tela deve de edição deve iniciar preenchida com os dados do usuário
+[x] - 10. A tela deve de edição deve iniciar preenchida com os dados do usuário
    selecionados;
 
-[] - 11. A edição deve refletir de imediato no storage da aplicação;
+[x] - 11. A edição deve refletir de imediato no storage da aplicação;
 
-[] - 12. Ao clicar em salvar, deve redirecionar para a tela de home novamente e
+[x] - 12. Ao clicar em salvar, deve redirecionar para a tela de home novamente e
    trazer a lista de usuários atualizada;
 
-[] - 13. Ao clicar no botão de criar, deve redirecionar para a página de criação de
+[x] - 13. Ao clicar no botão de criar, deve redirecionar para a página de criação de
    usuário;
 
-[] - 14. O usuário deve ver a opção de inserir imagem;
+[x] - 14. O usuário deve ver a opção de inserir imagem;
 
-[] - 15. O usuário deve preencher os dados nos inputs;
+[x] - 15. O usuário deve preencher os dados nos inputs;
 
-[] - 16. Ao clicar em salvar, redirecionar para a home;
+[x] - 16. Ao clicar em salvar, redirecionar para a home;
 
 [x] - 17. Ao clicar em deslogar, o usuário deve retornar para a tela de login;
 
@@ -74,3 +74,12 @@ build: usado quando se realiza alguma modificação em arquivos de build e depen
 
 
 
+# bugs
+  - fazer o modal de confirmação
+  - retirar o bug de alteração de pessoa
+    - caso tenha uma foto e altere qualquer outro parametro a foto se perde
+
+# falta
+  - fazer o layout responsivo
+  - fazer o readme
+  - melhorar algumas partes
