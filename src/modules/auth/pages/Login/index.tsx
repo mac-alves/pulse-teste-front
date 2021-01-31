@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import AuthRoutes from '../../paths.routes'
+import { useHistory } from 'react-router-dom'
 import { FaUser, FaLock } from 'react-icons/fa'
-import { GiConfirmed } from 'react-icons/gi'
+import AuthRoutes from '../../paths.routes'
 
-import { Notification } from '../../../../shared/styles/components'
 import {
   Content,
   Card,
@@ -22,11 +21,12 @@ import SecurityInput from '../../../../shared/components/Form/SecurityInput'
 
 import LogoImage from '../../../../assets/images/logo.png'
 import BannerLoginImage from '../../../../assets/images/banner-login.svg'
-import { useHistory, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/auth'
-import { LocationState, PropsAlert } from '../../../../shared/interfaces'
-import { queryParamsToJson, strToBool } from '../../../../shared/utils'
 import AppRoutes from '../../../app/paths.routes'
+import MessageModal, {
+  ModalHandles
+} from '../../../../shared/components/ui/MessageModal'
+import { CustomErrorRequest } from '../../../../shared/errors'
 
 interface PropsForm {
   username: string
@@ -36,11 +36,10 @@ interface PropsForm {
 
 const Login: React.FC = () => {
   const formRef = useRef(null)
+  const modalRef = useRef<ModalHandles>(null)
   const history = useHistory()
   const { singIn } = useAuth()
-  const location = useLocation<LocationState>()
   const [loading, setLoading] = useState(false)
-  const [alert, setAlert] = useState<PropsAlert>({ type: 'info', msg: '' })
 
   async function handleSubmit(dataForm: PropsForm) {
     setLoading(true)
@@ -50,29 +49,29 @@ const Login: React.FC = () => {
       200: true
     }
 
-    const result = await singIn(
-      dataForm.username,
-      dataForm.password,
-      dataForm.remember
-    )
-    setAlert({
-      type: 'error',
-      msg: result === 401 || result === 404 ? codes[result] : ''
-    })
+    try {
+      const result = await singIn(
+        dataForm.username,
+        dataForm.password,
+        dataForm.remember
+      )
+
+      if (result === 401 || result === 404) {
+        throw new CustomErrorRequest(codes[404])
+      }
+
+      setLoading(false)
+      history.replace(AppRoutes.HOME)
+    } catch (error) {
+      if (error instanceof CustomErrorRequest) {
+        modalRef.current?.openModal('error', 'Error', error.message)
+      }
+    }
     setLoading(false)
-    history.replace(AppRoutes.HOME)
   }
 
   useEffect(() => {
-    const search = queryParamsToJson(location.search)
-    const hasProp = Object.prototype.hasOwnProperty.call(search, 'success')
-
-    if (hasProp && strToBool(search.success)) {
-      setAlert({ type: 'success', msg: 'Cadastro Realizado com sucesso.' })
-    }
-
     return () => {
-      setAlert({ type: 'info', msg: '' })
       setLoading(false)
     }
   }, [location])
@@ -84,12 +83,6 @@ const Login: React.FC = () => {
       </Card>
       <Main>
         <Division>
-          {alert.msg && (
-            <Notification type={alert.type}>
-              <GiConfirmed size={20} />
-              <p>{alert.msg}</p>
-            </Notification>
-          )}
           <Logo src={LogoImage} alt="Logo" />
           <Form onSubmit={handleSubmit} ref={formRef}>
             <Input name="username" placeholder="Usuário" type="text" required>
@@ -110,6 +103,10 @@ const Login: React.FC = () => {
         <Division>
           <BannerLogin src={BannerLoginImage} alt="Banner Login" />
         </Division>
+        <MessageModal
+          operationClose={() => history.push(AuthRoutes.LOGIN)}
+          ref={modalRef}
+        />
       </Main>
     </Content>
   )

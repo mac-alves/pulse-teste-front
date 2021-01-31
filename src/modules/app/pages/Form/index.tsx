@@ -2,14 +2,12 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { OptionTypeBase } from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { RiUserShared2Line } from 'react-icons/ri'
-import { BiError } from 'react-icons/bi'
 import { IoMdArrowBack } from 'react-icons/io'
 import { Axios } from '../../../../shared/axios'
 import { useAuth } from '../../../auth/contexts/auth'
 
 import Input from '../../../../shared/components/Form/Input'
 import Select from '../../../../shared/components/Form/Select'
-import { Notification } from '../../../../shared/styles/components'
 import { Content, Card, Main, Image, Title } from '../../styles'
 import {
   Back,
@@ -27,8 +25,10 @@ import { CustomErrorRequest } from '../../../../shared/errors'
 import { usePerson } from '../../contexts/person'
 import AuthRoutes from '../../../auth/paths.routes'
 import AppRoutes from '../../paths.routes'
-import { Params } from '../../../../shared/utils'
 import { Person } from '../../interfaces'
+import MessageModal, {
+  ModalHandles
+} from '../../../../shared/components/ui/MessageModal'
 
 interface FormFields {
   img: File | undefined
@@ -37,6 +37,10 @@ interface FormFields {
   city: string
   age: number
   role: string
+}
+
+export interface Params {
+  [key: string]: any
 }
 
 const roles: OptionTypeBase[] = [
@@ -50,11 +54,11 @@ const Form: React.FC = () => {
   const { id } = useParams<Params>()
 
   const formRef = useRef(null)
+  const modalRef = useRef<ModalHandles>(null)
   const history = useHistory()
   const { singOut } = useAuth()
   const { savePerson, getPerson } = usePerson()
   const [loading, setLoading] = useState(false)
-  const [error, setErro] = useState('')
 
   const [ufs, setUfs] = useState<OptionTypeBase[]>([])
   const [cities, setCities] = useState<OptionTypeBase[]>([])
@@ -117,15 +121,12 @@ const Form: React.FC = () => {
       }
 
       setLoading(false)
-      history.push({
-        pathname: AppRoutes.HOME,
-        search: 'success=true'
-      })
+      modalRef.current?.openModal()
     } catch (err) {
       const validationErrors: any = {}
 
       if (err instanceof CustomErrorRequest) {
-        setErro(err.message)
+        modalRef.current?.openModal('error', 'Error', err.message)
       }
 
       if (err instanceof Yup.ValidationError) {
@@ -296,12 +297,10 @@ const Form: React.FC = () => {
             <Submit>{loading ? 'Carregando...' : 'Salvar'}</Submit>
           </Fields>
         </FormPerson>
-        {error && (
-          <Notification type="error">
-            <BiError size={20} />
-            <p>{error}</p>
-          </Notification>
-        )}
+        <MessageModal
+          operationClose={() => history.push(AppRoutes.HOME)}
+          ref={modalRef}
+        />
       </Main>
     </Content>
   )

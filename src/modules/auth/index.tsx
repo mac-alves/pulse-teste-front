@@ -15,6 +15,9 @@ const AuthModule: React.FC = () => {
         <Switch>
           <Route exact path={AuthRoutes.LOGIN} component={Login} />
           <Route path={AuthRoutes.REGISTER} component={Register} />
+          <Route path="*">
+            <h3>404</h3>
+          </Route>
         </Switch>
       </Container>
     </BrowserRouter>

@@ -82,4 +82,9 @@ build: usado quando se realiza alguma modificação em arquivos de build e depen
 # falta
   - fazer o layout responsivo
   - fazer o readme
+  - criar a pagina de 404
   - melhorar algumas partes
+
+:bug: fix: Removed notification bug
+
+BREAKING CHANGE: added confirmation modal

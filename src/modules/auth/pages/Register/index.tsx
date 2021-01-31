@@ -2,9 +2,7 @@
 import React, { useRef, useState } from 'react'
 import AuthRoutes from '../../paths.routes'
 import { FaUser, FaLock } from 'react-icons/fa'
-import { BiError } from 'react-icons/bi'
 
-import { Notification } from '../../../../shared/styles/components'
 import {
   Content,
   Card,
@@ -18,6 +16,7 @@ import {
 } from '../../styles'
 import Input from '../../../../shared/components/Form/Input'
 import SecurityInput from '../../../../shared/components/Form/SecurityInput'
+import MessageModal, { ModalHandles } from '../../../../shared/components/ui/MessageModal'
 
 import LogoImage from '../../../../assets/images/logo.png'
 import BannerRegisterImage from '../../../../assets/images/banner-register.svg'
@@ -36,9 +35,9 @@ interface PropsForm {
 const Register: React.FC = () => {
   const history = useHistory()
   const formRef = useRef(null)
+  const modalRef = useRef<ModalHandles>(null)
   const { register } = useAuth()
   const [loading, setLoading] = useState(false)
-  const [error, setErro] = useState('')
 
   async function handleSubmit(data: PropsForm) {
     (formRef as any).current.setErrors({})
@@ -67,15 +66,12 @@ const Register: React.FC = () => {
       }
 
       setLoading(false)
-      history.push({
-        pathname: AuthRoutes.LOGIN,
-        search: 'success=true'
-      })
+      modalRef.current?.openModal()
     } catch (err) {
       const validationErrors: any = {}
 
       if (err instanceof CustomErrorRequest) {
-        setErro(err.message)
+        modalRef.current?.openModal('error', 'Error', err.message)
       }
 
       if (err instanceof Yup.ValidationError) {
@@ -102,11 +98,6 @@ const Register: React.FC = () => {
           <BannerLogin src={BannerRegisterImage} alt="Banner Login" />
         </Division>
         <Division>
-          {error && (
-            <Notification type="error">
-              <BiError size={20}/><p>{error}</p>
-            </Notification>
-          )}
           <Logo src={LogoImage} alt="Logo" />
           <Form onSubmit={handleSubmit} ref={formRef}>
             <Input name="username" placeholder="Usuário" type="text" required>
@@ -130,6 +121,10 @@ const Register: React.FC = () => {
             <Link to={AuthRoutes.LOGIN}>Login.</Link>
           </OtherOption>
         </Division>
+        <MessageModal
+          operationClose={() => history.push(AuthRoutes.LOGIN)}
+          ref={modalRef}
+        />
       </Main>
     </Content>
   )
