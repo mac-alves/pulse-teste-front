@@ -22,7 +22,7 @@ const SecurityInput: React.FC<InputProps> = ({ name, children, ...rest }) => {
   }, [fieldName, registerField])
 
   return (
-    <Container>
+    <Container className={error ? 'error' : ''}>
       <div className="icon">{children}</div>
       <button
         type="button"

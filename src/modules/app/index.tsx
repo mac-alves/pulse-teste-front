@@ -7,14 +7,17 @@ import Home from './pages/Home'
 import Create from './pages/Create'
 
 import { Container } from './styles'
+import { PersonProvider } from './contexts/person'
 
 const AppModule: React.FC = () => {
   return (
     <BrowserRouter>
       <Container>
         <Switch>
-          <Route exact path={AppRoutes.HOME} component={Home} />
-          <Route exact path={AppRoutes.PERSON.create} component={Create} />
+          <PersonProvider>
+            <Route exact path={AppRoutes.HOME} component={Home} />
+            <Route path={AppRoutes.PERSON.create} component={Create} />
+          </PersonProvider>
         </Switch>
       </Container>
     </BrowserRouter>

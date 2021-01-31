@@ -80,34 +80,8 @@ export const Submit = styled.button`
 
 export const Group = styled.div`
   display: flex;
-`
 
-interface PropsSelect {
-  flex?: number
-}
-
-export const Select = styled.select<PropsSelect>`
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  height: 45px;
-  width: 100%;
-  padding: 10px;
-  background-color: transparent;
-  border: 2px solid ${props => props.theme.colors.placeholder};
-  font-size: 14px;
-  color: ${props => props.theme.colors.secondary};
-  transition: all 0.3s linear;
-  border-radius: 7px;
-  cursor: pointer;
-  margin-bottom: 10px;
-  flex: ${props => (props.flex ? props.flex : 1)};
-
-  &:not(:last-child) {
+  & > div:not(:last-child) {
     margin-right: 10px;
-  }
-
-  &:focus {
-    outline: 0;
   }
 `

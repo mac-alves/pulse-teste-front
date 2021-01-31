@@ -34,26 +34,37 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<ContextUser | null>(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const storageContextUser = localStorage.getItem('@PULSE:context-user')
-    const sessionContextUser = sessionStorage.getItem('@PULSE:context-user')
-
-    if (storageContextUser) {
-      setUser(JSON.parse(storageContextUser))
+  const getContextUser = () => {
+    const session = sessionStorage.getItem('@PULSE:context-user')
+    if (session) {
+      const user: ContextUser = JSON.parse(session)
+      return user
     }
 
-    if (sessionContextUser) {
-      setUser(sessionContextUser ? JSON.parse(sessionContextUser) : null)
+    const storage = localStorage.getItem('@PULSE:context-user')
+    if (storage) {
+      const user: ContextUser = JSON.parse(storage)
+      return user
+    }
+
+    return null
+  }
+
+  useEffect(() => {
+    const user = getContextUser()
+
+    if (user) {
+      setUser(user)
     }
 
     setLoading(false)
   }, [])
 
-  async function singIn(
+  const singIn = async (
     username: string,
     password: string,
     remember: boolean
-  ): Promise<401 | 404 | 200> {
+  ): Promise<401 | 404 | 200> => {
     try {
       if (username && password) {
         const storage = localStorage.getItem('@PULSE:users')
@@ -98,7 +109,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     return 401
   }
 
-  function singOut(): 200 {
+  const singOut = (): 200 => {
     setUser(null)
     localStorage.removeItem('@PULSE:context-user')
     sessionStorage.removeItem('@PULSE:context-user')
@@ -106,10 +117,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     return 200
   }
 
-  async function register(
+  const register = async (
     username: string,
     password: string
-  ): Promise<401 | 200> {
+  ): Promise<401 | 200> => {
     try {
       if (username && password) {
         const storage = localStorage.getItem('@PULSE:users')

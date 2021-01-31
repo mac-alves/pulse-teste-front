@@ -4,6 +4,7 @@ import AuthRoutes from '../../paths.routes'
 import { FaUser, FaLock } from 'react-icons/fa'
 import { BiError } from 'react-icons/bi'
 
+import { Notification } from '../../../../shared/styles/components'
 import {
   Content,
   Card,
@@ -13,7 +14,6 @@ import {
   OtherOption,
   Link,
   Form,
-  Notification,
   Logo, BannerLogin
 } from '../../styles'
 import Input from '../../../../shared/components/Form/Input'
@@ -69,7 +69,7 @@ const Register: React.FC = () => {
       setLoading(false)
       history.push({
         pathname: AuthRoutes.LOGIN,
-        state: { success: true }
+        search: 'success=true'
       })
     } catch (err) {
       const validationErrors: any = {}

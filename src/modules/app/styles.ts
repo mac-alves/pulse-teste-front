@@ -78,6 +78,7 @@ export const Image = styled.img`
   height: auto;
   max-width: 179px;
   margin: 30px 0 20px 0;
+  cursor: pointer;
 `
 
 export const Title = styled.div`

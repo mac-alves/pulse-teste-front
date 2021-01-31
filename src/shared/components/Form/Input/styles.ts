@@ -13,6 +13,10 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
   }
+
+  &.error {
+    margin-bottom: 5px;
+  }
 `
 
 interface Props {

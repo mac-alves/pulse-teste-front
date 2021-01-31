@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({ name, children, ...rest }) => {
   }, [fieldName, registerField])
 
   return (
-    <Container>
+    <Container className={error ? 'error' : ''}>
       <div className="icon">{children}</div>
       <InputField
         className={error ? 'error' : ''}

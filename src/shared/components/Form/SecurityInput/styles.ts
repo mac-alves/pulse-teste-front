@@ -30,6 +30,10 @@ export const Container = styled.div`
       outline: none;
     }
   }
+
+  &.error {
+    margin-bottom: 5px;
+  }
 `
 
 interface Props {

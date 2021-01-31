@@ -3,6 +3,7 @@ import AuthRoutes from '../../paths.routes'
 import { FaUser, FaLock } from 'react-icons/fa'
 import { GiConfirmed } from 'react-icons/gi'
 
+import { Notification } from '../../../../shared/styles/components'
 import {
   Content,
   Card,
@@ -12,7 +13,6 @@ import {
   OtherOption,
   Link,
   Form,
-  Notification,
   Logo,
   BannerLogin
 } from '../../styles'
@@ -24,24 +24,13 @@ import LogoImage from '../../../../assets/images/logo.png'
 import BannerLoginImage from '../../../../assets/images/banner-login.svg'
 import { useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/auth'
+import { LocationState, PropsAlert } from '../../../../shared/interfaces'
+import { queryParamsToJson, strToBool } from '../../../../shared/utils'
 
 interface PropsForm {
   username: string
   password: string
   remember: boolean
-}
-
-interface LocationState {
-  hash: string
-  key: string
-  pathname: string
-  search: string
-  success?: boolean
-}
-
-interface PropsAlert {
-  msg: string
-  type: keyof { error: string; success: string; info: string }
 }
 
 const Login: React.FC = () => {
@@ -72,9 +61,10 @@ const Login: React.FC = () => {
   }
 
   useEffect(() => {
-    const { success } = location.state ? location.state : { success: false }
+    const search = queryParamsToJson(location.search)
+    const hasProp = Object.prototype.hasOwnProperty.call(search, 'success')
 
-    if (success) {
+    if (hasProp && strToBool(search.success)) {
       setAlert({ type: 'success', msg: 'Cadastro Realizado com sucesso.' })
     }
 

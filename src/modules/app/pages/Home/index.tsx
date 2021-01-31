@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiUserShared2Line } from 'react-icons/ri'
 import { AiOutlinePlus, AiFillEdit } from 'react-icons/ai'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { IoMdTrash } from 'react-icons/io'
 import { FaUserAlt } from 'react-icons/fa'
+import { GiConfirmed } from 'react-icons/gi'
 
 import { useAuth } from '../../../auth/contexts/auth'
 
+import { Notification } from '../../../../shared/styles/components'
 import { Content, Card, Main, Image, Title } from '../../styles'
 import {
   Table,
@@ -21,6 +23,10 @@ import {
 
 import LogoImage from '../../../../assets/images/logo.png'
 import AppRoutes from '../../paths.routes'
+import { LocationState, PropsAlert } from '../../../../shared/interfaces'
+import { useHistory, useLocation } from 'react-router-dom'
+import { queryParamsToJson, strToBool } from '../../../../shared/utils'
+import { usePerson } from '../../contexts/person'
 
 const dataTable = [
   {
@@ -62,6 +68,27 @@ const dataTable = [
 
 const Home: React.FC = () => {
   const { singOut } = useAuth()
+  const location = useLocation<LocationState>()
+  const { persons } = usePerson()
+  const history = useHistory()
+  const [alert, setAlert] = useState<PropsAlert>({ type: 'info', msg: '' })
+
+  useEffect(() => {
+    const search = queryParamsToJson(location.search)
+    const hasProp = Object.prototype.hasOwnProperty.call(search, 'success')
+
+    if (hasProp && strToBool(search.success)) {
+      setAlert({ type: 'success', msg: 'Cadastro Realizado com sucesso.' })
+    }
+
+    return () => {
+      setAlert({ type: 'info', msg: '' })
+    }
+  }, [location])
+
+  useEffect(() => {
+    console.log(persons)
+  }, [persons])
 
   return (
     <Content>
@@ -76,7 +103,17 @@ const Home: React.FC = () => {
         </button>
       </Card>
       <Main>
-        <Image src={LogoImage} alt="Logo" />
+        <Image
+          src={LogoImage}
+          alt="Logo"
+          onClick={() => history.replace(AppRoutes.HOME)}
+        />
+        {alert.msg && (
+          <Notification type={alert.type}>
+            <GiConfirmed size={20} />
+            <p>{alert.msg}</p>
+          </Notification>
+        )}
         <Table>
           <Header>
             <div>

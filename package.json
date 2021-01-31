@@ -19,6 +19,7 @@
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-select": "^4.0.2",
     "styled-components": "^5.2.1",
     "typescript": "^4.0.3",
     "uuid": "^8.3.2",
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/react-router-dom": "^5.1.7",
+    "@types/react-select": "^4.0.8",
     "@types/styled-components": "^5.1.7",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
