@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Form as FormWeb } from '@unform/web'
+import { DEVICE } from '../../../../shared/utils'
 
 export const Back = styled.div`
   position: absolute;
@@ -36,6 +37,12 @@ export const Back = styled.div`
       outline: none;
     }
   }
+
+  @media ${DEVICE.mobileL} {
+    p {
+      font-size: 15px;
+    }
+  }
 `
 
 export const Form = styled(FormWeb)`
@@ -45,13 +52,28 @@ export const Form = styled(FormWeb)`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  @media ${DEVICE.mobileL} {
+    flex-direction: column;
+    padding: 0px 15px;
+    margin-top: 10px;
+  }
 `
 
-export const Files = styled.div``
+export const Files = styled.div`
+  @media ${DEVICE.mobileL} {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+`
 
 export const Fields = styled.div`
   width: 100%;
   margin-left: 20px;
+
+  @media ${DEVICE.mobileL} {
+    margin-left: 0px;
+  }
 `
 
 export const Submit = styled.button`

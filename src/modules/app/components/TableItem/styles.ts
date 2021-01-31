@@ -1,7 +1,19 @@
 import styled from 'styled-components'
+import { DEVICE } from '../../../../shared/utils'
 
 export const Delete = styled.div`
   transition: 0.3s linear all;
+
+  @media ${DEVICE.mobileL} {
+    height: 25px;
+    margin-left: 10px;
+  }
+`
+
+export const Edite = styled.div`
+  @media ${DEVICE.mobileL} {
+    height: 25px;
+  }
 `
 
 export const ImageUser = styled.div`

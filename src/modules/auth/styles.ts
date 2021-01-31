@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link as LinkRouter } from 'react-router-dom'
 import { Form as FormWeb } from '@unform/web'
+import { DEVICE } from '../../shared/utils'
 
 export const Container = styled.div`
   width: 833px;
@@ -9,6 +10,12 @@ export const Container = styled.div`
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
+
+  @media ${DEVICE.mobileL} {
+    width: calc(100vw - 20px);
+    height: initial;
+    margin-bottom: 20px;
+  }
 `
 
 export const Content = styled.div`
@@ -41,6 +48,11 @@ export const Card = styled.div`
 export const Main = styled.main`
   height: 100%;
   display: flex;
+
+  @media ${DEVICE.mobileL} {
+    flex-direction: column;
+    padding: 60px 0 30px 0;
+  }
 `
 
 export const Division = styled.div`
@@ -52,6 +64,14 @@ export const Division = styled.div`
   flex-direction: column;
 `
 
+export const Banner = styled(Division)`
+  @media ${DEVICE.mobileL} {
+    display: none;
+  }
+`
+
+export const FormContainer = styled(Division)``
+
 export const Logo = styled.img`
   width: auto;
   height: auto;
@@ -62,6 +82,10 @@ export const Logo = styled.img`
 export const Form = styled(FormWeb)`
   width: 100%;
   padding: 0px 30px;
+
+  @media ${DEVICE.mobileL} {
+    padding: 0px 15px;
+  }
 `
 
 export const Submit = styled.button`

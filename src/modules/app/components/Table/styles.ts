@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { DEVICE } from '../../../../shared/utils'
 
 export const Container = styled.div`
   width: calc(100% - 100px);
+  overflow-x: auto;
+
+  @media ${DEVICE.mobileL} {
+    width: calc(100% - 30px);
+  }
 `
 
 export const Header = styled.div`
@@ -32,6 +38,10 @@ export const Plus = styled(Link)`
     transform: scale(1.01);
     box-shadow: inset 0px 0px 5px -1px rgba(0, 0, 0, 0.7);
   }
+
+  @media ${DEVICE.mobileL} {
+    margin-left: 0px;
+  }
 `
 
 export const Pages = styled.div`
@@ -47,6 +57,7 @@ export const Body = styled.table`
   thead {
     tr {
       th {
+        padding-right: 5px;
         text-align: left;
         font-size: 15px;
         height: 35px;
@@ -72,6 +83,7 @@ export const Body = styled.table`
       }
 
       td {
+        padding-right: 5px;
         font-size: 15px;
         height: 45px;
 
@@ -100,6 +112,40 @@ export const Body = styled.table`
       }
     }
   }
+
+  @media ${DEVICE.mobileL} {
+    thead {
+      tr {
+        th {
+          &:first-child {
+            display: none;
+          }
+
+          &:last-child {
+            width: 15%;
+            padding-right: 0px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          font-size: 15px;
+          height: 45px;
+
+          &:first-child {
+            display: none;
+          }
+
+          &:last-child {
+            padding-right: 0px;
+          }
+        }
+      }
+    }
+  }
 `
 
 export const TableFooter = styled.div`
@@ -107,6 +153,12 @@ export const TableFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media ${DEVICE.mobileL} {
+    & > p {
+      display: none;
+    }
+  }
 `
 
 export const Navigation = styled.div`
@@ -133,6 +185,15 @@ export const Navigation = styled.div`
 
     &:focus {
       outline: 0;
+    }
+  }
+
+  @media ${DEVICE.mobileL} {
+    width: 100%;
+    justify-content: space-between;
+
+    button {
+      margin-left: 0px;
     }
   }
 `

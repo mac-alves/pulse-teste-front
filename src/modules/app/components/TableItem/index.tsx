@@ -5,7 +5,7 @@ import { FaUserAlt } from 'react-icons/fa'
 import { TiInfoOutline } from 'react-icons/ti'
 import { AiFillEdit } from 'react-icons/ai'
 
-import { Delete, ImageUser } from './styles'
+import { Delete, Edite, ImageUser } from './styles'
 import { useHistory } from 'react-router-dom'
 import { usePerson } from '../../contexts/person'
 import { Person } from '../../interfaces'
@@ -66,10 +66,12 @@ const TableItem: React.FC<Props> = ({ item }) => {
       <td>{item.age}</td>
       <td>{item.role}</td>
       <td>
-        <AiFillEdit
-          onClick={() => history.push(`${AppRoutes.PERSON.initial}/${item.id}`)}
-          size={20}
-        />
+        <Edite >
+          <AiFillEdit
+            onClick={() => history.push(`${AppRoutes.PERSON.initial}/${item.id}`)}
+            size={20}
+          />
+        </Edite>
         <Delete
           title={confirm ? 'Confirme' : 'Excluir Pessoa'}
           onClick={() => handleDelete(item.id)}

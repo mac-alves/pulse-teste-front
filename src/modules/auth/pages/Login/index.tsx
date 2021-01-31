@@ -7,7 +7,8 @@ import {
   Content,
   Card,
   Main,
-  Division,
+  Banner,
+  FormContainer,
   Submit,
   OtherOption,
   Link,
@@ -82,7 +83,7 @@ const Login: React.FC = () => {
         <p>Login</p>
       </Card>
       <Main>
-        <Division>
+        <FormContainer>
           <Logo src={LogoImage} alt="Logo" />
           <Form onSubmit={handleSubmit} ref={formRef}>
             <Input name="username" placeholder="Usuário" type="text" required>
@@ -99,10 +100,10 @@ const Login: React.FC = () => {
             <Link to={AuthRoutes.REGISTER}>Criar Conta</Link>
             <i></i>
           </OtherOption>
-        </Division>
-        <Division>
+        </FormContainer>
+        <Banner>
           <BannerLogin src={BannerLoginImage} alt="Banner Login" />
-        </Division>
+        </Banner>
         <MessageModal
           operationClose={() => history.push(AuthRoutes.LOGIN)}
           ref={modalRef}

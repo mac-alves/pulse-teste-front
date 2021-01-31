@@ -7,7 +7,8 @@ import {
   Content,
   Card,
   Main,
-  Division,
+  Banner,
+  FormContainer,
   Submit,
   OtherOption,
   Link,
@@ -94,10 +95,10 @@ const Register: React.FC = () => {
         <p>Criar Conta</p>
       </Card>
       <Main>
-        <Division>
+        <Banner>
           <BannerLogin src={BannerRegisterImage} alt="Banner Login" />
-        </Division>
-        <Division>
+        </Banner>
+        <FormContainer>
           <Logo src={LogoImage} alt="Logo" />
           <Form onSubmit={handleSubmit} ref={formRef}>
             <Input name="username" placeholder="Usuário" type="text" required>
@@ -109,7 +110,6 @@ const Register: React.FC = () => {
             <SecurityInput
               name="confirmPassword"
               placeholder="Confirmar Senha"
-              type="password"
               required
             >
               <FaLock />
@@ -120,7 +120,7 @@ const Register: React.FC = () => {
             <p>Já possui conta ?</p>
             <Link to={AuthRoutes.LOGIN}>Login.</Link>
           </OtherOption>
-        </Division>
+        </FormContainer>
         <MessageModal
           operationClose={() => history.push(AuthRoutes.LOGIN)}
           ref={modalRef}

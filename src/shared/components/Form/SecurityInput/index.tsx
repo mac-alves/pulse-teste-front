@@ -27,7 +27,7 @@ const SecurityInput: React.FC<InputProps> = ({ name, children, ...rest }) => {
       <button
         type="button"
         className="visible"
-        onClick={() => { console.log('aqui'); setVisible(visible => !visible) }}
+        onClick={() => setVisible(visible => !visible)}
       >
         {visible ? <AiFillEyeInvisible size={23} /> : <MdVisibility size={23} />}
       </button>

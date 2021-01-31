@@ -43,7 +43,7 @@ const MessageModal: React.ForwardRefRenderFunction<ModalHandles, Props> = (
   { operationClose },
   ref
 ) => {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
   const [infoModal, setInfoModal] = useState<TypeInfoModal>({
     type: 'success',
     title: 'Sucesso',

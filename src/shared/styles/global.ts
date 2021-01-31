@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { DEVICE } from '../utils'
 
 export default createGlobalStyle`
   * {
@@ -23,5 +24,12 @@ export default createGlobalStyle`
     background: ${props => props.theme.colors.backgroundColor};
     color: ${props => props.theme.colors.text};
     font: 400 16px 'Poppins', sans-serif;
+  }
+
+  @media ${DEVICE.mobileL} {
+    body {
+      align-items: flex-start;
+      padding-top: 20px;
+    }
   }
 `

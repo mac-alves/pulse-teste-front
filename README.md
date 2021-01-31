@@ -75,16 +75,11 @@ build: usado quando se realiza alguma modificação em arquivos de build e depen
 
 
 # bugs
-  - fazer o modal de confirmação
   - retirar o bug de alteração de pessoa
     - caso tenha uma foto e altere qualquer outro parametro a foto se perde
 
 # falta
-  - fazer o layout responsivo
+  - criar modal de confirmação para o delete
   - fazer o readme
   - criar a pagina de 404
   - melhorar algumas partes
-
-:bug: fix: Removed notification bug
-
-BREAKING CHANGE: added confirmation modal

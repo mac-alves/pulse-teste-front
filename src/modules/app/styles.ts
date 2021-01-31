@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE } from '../../shared/utils'
 
 export const Container = styled.div`
   width: 833px;
@@ -7,6 +8,12 @@ export const Container = styled.div`
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
+
+  @media ${DEVICE.mobileL} {
+    width: calc(100vw - 20px);
+    height: initial;
+    margin-bottom: 20px;
+  }
 `
 
 export const Content = styled.div`
@@ -62,6 +69,12 @@ export const Card = styled.div<CardProps>`
       outline: none;
     }
   }
+
+  @media ${DEVICE.mobileL} {
+    p {
+      font-size: 15px;
+    }
+  }
 `
 
 export const Main = styled.main`
@@ -71,6 +84,11 @@ export const Main = styled.main`
   align-items: center;
   flex-direction: column;
   padding: 20px;
+
+  @media ${DEVICE.mobileL} {
+    flex-direction: column;
+    padding: 60px 0 30px 0;
+  }
 `
 
 export const Image = styled.img`
