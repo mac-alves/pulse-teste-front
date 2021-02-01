@@ -3,9 +3,9 @@
 </h1> -->
 
 <h1 align="center">
-  Teste Front-End PULSE
+  Teste Front-End @Pulse
 </h1>
-<h3 align="center">Sistema Desenvolvido, mediante requisitos, para o processo seletivos para a vaga de Front-End da empresa PULSE.</h3>
+<h3 align="center">Sistema Desenvolvido, mediante requisitos, para o processo seletivos para a vaga de Front-End da empresa @Pulse.</h3>
 <br/>
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/mac-alves/pulse-teste-front">
@@ -18,16 +18,17 @@
   <a href="#rocket-technologies">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#bangbang-dependencies">Dependências</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-how-to-use">Como usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-how-to-use">Informações</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-how-to-use">Diagramas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#bangbang-license">Requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#bangbang-license">Informações</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#link-useful-links">Links úteis</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-license">License</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">Licença</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-license">Autor</a>
 </p>
 
 ## :rocket: &nbsp;&nbsp;&nbsp; Tecnologias
 
-This project was developed with the following technologies:
+Este projeto foi desenvolvido com as seguintes tecnologias:
 -  [ReactJs](https://reactjs.org/)
 -  [TypeScript](https://www.typescriptlang.org/)
 -  [Unform](https://unform.dev/)
@@ -48,7 +49,7 @@ This project was developed with the following technologies:
 - [Git](https://git-scm.com),
 - [Node.js v12.16.1][nodejs] + [YARN v1.22.4][yarn]
 
-## :information_source: &nbsp;&nbsp;&nbsp; How To Use
+## :information_source: &nbsp;&nbsp;&nbsp; Como usar
 
 ```bash
 # Clone o repositório
@@ -65,9 +66,9 @@ $ yarn start
 ```
 
 ## :bangbang: &nbsp;&nbsp;&nbsp; Informações
-- Foi criado um layout simples do sistema através da plataforma Figma tendo como base os requisitos propostos, o link consta na sessão `Links Úteis`.
+- Foi criado um layout simples do sistema através da plataforma Figma tendo como base os requisitos propostos. O link consta na sessão `Links Úteis`.
 - O layout foi desenvolvido de forma a ser responsivo, adaptando-se em telas tanto de computadores como smartphones.
-- Foi utilizado para o gerenciamento de estado da aplicação o `Context API` padrão do react através da criação de `hooks` dedicados.
+- Foi utilizado para o gerenciamento de estado da aplicação o `Context API`, padrão do react, através da criação de `hooks` dedicados.
 - Os componentes foram desenvolvidos de forma a aplicar o máximo de conhecimentos que possuo da plataforma e das tecnologias envolvidas. Pode-se verificar no código:
   - A criação de `hooks` dedicados;
   - Utilização de `hooks` próprios do react, tais como: `useState`, `useEffect`, `useRef`, `useCallback`;
@@ -75,23 +76,23 @@ $ yarn start
   - Comunicação entre componentes: `pai-filho`, `filho-pai`;
   - Gerência de rotas publicas e privadas;
   - Persistência de dados com localStorage;
-  - consumo de api REST com axios;
-  - entre outros;
-- Pelo fato da aplicação utilizar a API do localStorage para persistência de dados, houve a necessidade de implementar requisições a API externas como forma de demonstração de conhecimento, logo foi utilizada a consulta a API publica do IBGE para montar o combo de estados e cidade no cadastro de pessoas.
+  - Consumo de api REST com axios;
+  - Entre outros;
+- Pelo fato de a aplicação utilizar a API do localStorage para persistência de dados, houve a necessidade de implementar requisições a API externas como forma de demonstração de conhecimento, logo foi utilizada a consulta a API pública do IBGE para montar o combo de estados e cidade no cadastro de pessoas.
 
 ## :bangbang: &nbsp;&nbsp;&nbsp; Diagramas
 - Mediante os requisitos descritos no documento para a elaboração do sistema foi desenvolvido o seguinte fluxograma de funcionamento do sistema elaborado.
-  - O sistema inicia quando o usuário acessa o sistema pelo navegador. A aplicação por sua vez busca no sistema de armazenamento de ja existe dado de login do usuário. Caso haja o usuário é redirecionado para o modulo `App` caso contrario para o modulo `Auth`
+  - O sistema inicia quando o usuário acessa o sistema pelo navegador. A aplicação por sua vez busca no sistema de armazenamento se ja existe dado de login do usuário. Caso haja, o usuário é redirecionado para o modulo `App`, caso contrário, para o modulo `Auth`.
 <p align="center">
 <img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1612148268/projetos/teste-front-pulse/inicio_zyp74c.png" />
 </p>
 
-  - Ao iniciar o modulo `Auth`, o usuario tem a opção de acessar as duas telas: `Login` e `Criar conta`.
+  - Ao iniciar o modulo `Auth`, o usuário tem a opção de acessar as duas telas: `Login` e `Criar conta`.
   - Caso, na tela de `Criar conta`, o usuário informe os dados para cadastro e esses dados estiverem inválidos, o campo que possui o dado inválido ficará com as bordas vermelhas e a mensagem de validação aparecerá também em vermelho.
-  - Caso os dados estejam certo, o novo registo é inserido no banco de dados (localStorage), uma mensagem de sucesso apareceŕa e apos fecha-la este será redirecionado para a tela `Login`
-  - Caso, na tela `Login` , o usuário informe os dados para acessar o sistema e estes dados estejam errados ou não existam correspondência no banco uma mensagem de erro aparece informando o ocorrido.
-  - Caso os dados estejam certos, é verificado se a opção `Lembrar de mim.` foi selecionada. Caso tenha sido selecionada o dados de registo do usuário será salvo tanto no localStorage quanto no sessionStorage, caso contrario o dado será salvo apenas no sessionStorage.
-  - Apos a inserção o usuario é redirecionado para a tela `Bem-Vindo` iniciando o modulo `App`.
+  - Caso os dados estejam certo, o novo registo é inserido no banco de dados (localStorage), uma mensagem de sucesso aparecerá e apos fecha-la, este será redirecionado para a tela `Login`.
+  - Caso, na tela `Login`, o usuário informe os dados para acessar o sistema e estes dados estejam errados ou não existam correspondência no banco uma mensagem de erro aparece informando o ocorrido.
+  - Caso os dados estejam certos, é verificado se a opção `Lembrar de mim.` foi selecionada. Caso tenha sido selecionada, os dados de registo do usuário será salvo tanto no localStorage quanto no sessionStorage, caso contrário, o dado será salvo apenas no sessionStorage.
+  - Após a inserção, o usuário é redirecionado para a tela `Bem-Vindo` iniciando o modulo `App`.
 
 <img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1612148268/projetos/teste-front-pulse/modulo_auth_z5adjf.png" />
 
@@ -101,12 +102,12 @@ $ yarn start
   - "Cadastrar pessoa" (Botão azul com o símbolo  `+` acima da tabela);
   - "Editar pessoa" (Botão com o símbolo de caneta nos registros da tabela);
   - "Excluir pessoa" (Botão com símbolo de lixeira nos registros da tabela)
-- Caso escolha a opção desligar, o dados de registro do de usuário logado será limpo tanto do localStorage quanto do sessionStorage.
+- Caso escolha a opção "Deslogar", os dados de registro do de usuário logado será limpo tanto do localStorage quanto do sessionStorage.
 - Caso escolha a opção de "Cadastrar pessoa", o usuário será redirecionado para a tela de `Cadastro` onde aparecerá os campos correspondentes para serem informados: nome, idade, estado, cidade, cargo e foto.
 - Caso os dados inseridos estejam incorretos, os campos a qual possui o erro ficará com a borda vermelha e a mensagem de validação aparecerá também em vermelho.
 - Caso os dados estejam certos, o novo registro será inserido no banco e uma mensagem de sucesso aparecerá em tela. Após fechar a mensagem, o usuário será redirecionado para a tela `Bem-Vindo` a qual possuirá o registro que acabou de ser salvo no topo dos registros disponíveis na tabela.
-- Caso escolha a opção "Editar pessoa", o usuário será redirecionado para a tela de `Edição` onde os dados do usuário selecionado estará nos campos do formulário proto para alteração.
-- Caso, apos alterar os dados, estes estiverem incorretos, os campos a qual possui o erro ficará com a borda vermelha e a mensagem de validação aparecerá também em vermelho.
+- Caso escolha a opção "Editar pessoa", o usuário será redirecionado para a tela de `Edição` onde os dados do usuário selecionado estarão nos campos do formulário pronto para alteração.
+- Caso, após alterar os dados, estes estiverem incorretos, os campos a qual possui o erro ficará com a borda vermelha e a mensagem de validação aparecerá também em vermelho.
 - Caso os dados estejam certos, o registro será atualizado no banco e uma mensagem de sucesso aparecerá em tela. Após fechar a mensagem, o usuário será redirecionado para a tela `Bem-Vindo` a qual possuirá o registro que acabou de ser salvo no topo dos registros disponíveis na tabela.
 - Caso escolha a opção de "Excluir pessoa", uma mensagem de confirmação aparecerá solicitando se deseja prosseguir, caso escolha a opção "Sim" o registro será apagado do banco, a mensagem de confirmação irá fechar e a tabela de pessoas cadastradas será atualizada.
 
@@ -167,8 +168,8 @@ $ yarn start
 ## :link: &nbsp;&nbsp;&nbsp; Links Úteis
  - Layout desenvolvido para este projeto na plataforma Figma: [Layout](https://www.figma.com/file/KrxVquQvClElMagRTWHM2a/pulse-teste-front?node-id=0%3A1)
 
-## :memo: &nbsp;&nbsp;&nbsp; License
-This project is under the MIT license. See the [LICENSE](https://github.com/mac-alves/pulse-teste-front/blob/main/LICENSE) for more information.
+## :memo: &nbsp;&nbsp;&nbsp; Licença
+Este projeto está sob a licença do MIT. Veja [LICENSE](https://github.com/mac-alves/pulse-teste-front/blob/main/LICENSE) for more information.
 
 ---
 
