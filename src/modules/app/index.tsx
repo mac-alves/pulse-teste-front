@@ -5,6 +5,7 @@ import AppRoutes from './paths.routes'
 
 import HomeApp from './pages/Home'
 import FormApp from './pages/Form'
+import NotFound from '../../shared/pages/NotFound'
 
 import { Container } from './styles'
 import { PersonProvider } from './contexts/person'
@@ -13,13 +14,16 @@ const AppModule: React.FC = () => {
   return (
     <BrowserRouter>
       <Container>
-        <Switch>
-          <PersonProvider>
+        <PersonProvider>
+          <Switch>
             <Route exact path={AppRoutes.HOME} component={HomeApp} />
-            <Route exact path={AppRoutes.PERSON.edite} component={FormApp} />
-            <Route exact path={AppRoutes.PERSON.create} component={FormApp} />
-          </PersonProvider>
-        </Switch>
+            <Route path={AppRoutes.PERSON.edite} component={FormApp} />
+            <Route path={AppRoutes.PERSON.create} component={FormApp} />
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </PersonProvider>
       </Container>
     </BrowserRouter>
   )

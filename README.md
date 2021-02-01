@@ -80,5 +80,4 @@ build: usado quando se realiza alguma modificação em arquivos de build e depen
 
 # falta
   - fazer o readme
-  - criar a pagina de 404
   - melhorar algumas partes
