@@ -43,6 +43,12 @@ export const Card = styled.div`
     color: white;
     margin: 0 25px 0 20px;
   }
+
+  @media ${DEVICE.mobileL} {
+    p {
+      font-size: 15px;
+    }
+  }
 `
 
 export const Main = styled.main`

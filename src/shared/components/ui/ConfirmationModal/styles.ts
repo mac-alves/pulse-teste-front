@@ -16,29 +16,15 @@ export const Container = styled.div`
   z-index: 10;
 `
 
-export interface TypeInfo {
-  type: keyof { error: string; success: string; info: string }
-}
-
-export const Card = styled.div<TypeInfo>`
+export const Card = styled.div`
   position: relative;
   max-width: 400px;
   background-color: white;
   padding: 15px;
   border-radius: 15px;
   border-left: 15px solid;
-  border-left-color: ${props =>
-    props.type === 'error'
-      ? props.theme.colors.primary
-      : props.type === 'success'
-      ? '#1dbf69'
-      : '#bfbe1d'};
-  color: ${props =>
-    props.type === 'error'
-      ? props.theme.colors.primary
-      : props.type === 'success'
-      ? '#1dbf69'
-      : '#bfbe1d'};
+  border-left-color: #bfbe1d;
+  color: #bfbe1d;
   display: flex;
 
   @media ${DEVICE.mobileL} {
@@ -68,14 +54,17 @@ export const Description = styled.div`
   color: ${props => props.theme.colors.text};
 `
 
-export const Action = styled.button`
-  position: absolute;
-  top: -7px;
-  right: -7px;
-  background-color: transparent;
+export const Button = styled.button`
+  background-color: ${props => props.theme.colors.secondary};
   border: none;
-  color: ${props => props.theme.colors.secondary};
+  color: white;
   cursor: pointer;
+  padding: 5px 7px;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:focus {
     outline: none;
@@ -84,4 +73,25 @@ export const Action = styled.button`
   &:hover {
     transform: scale(1.03);
   }
+
+  p {
+    margin-left: 5px;
+    font-size: 15px;
+  }
+`
+
+export const Actions = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+`
+
+export const Cancel = styled(Button)`
+  background-color: #ff5153;
+`
+
+export const Confirm = styled(Button)`
+  background-color: #1dbf69;
 `

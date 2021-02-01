@@ -79,7 +79,6 @@ build: usado quando se realiza alguma modificação em arquivos de build e depen
     - caso tenha uma foto e altere qualquer outro parametro a foto se perde
 
 # falta
-  - criar modal de confirmação para o delete
   - fazer o readme
   - criar a pagina de 404
   - melhorar algumas partes
