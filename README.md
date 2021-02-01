@@ -18,9 +18,9 @@
   <a href="#rocket-technologies">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#bangbang-dependencies">Dependências</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-how-to-use">Como usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#information_source-how-to-use">Informações</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#information_source-how-to-use">Diagramas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#bangbang-license">Requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#bell-informations">Informações</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#page_with_curl-diagrams">Diagramas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#white_check_mark-requirements">Requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#link-useful-links">Links úteis</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-license">Licença</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-license">Autor</a>
@@ -65,7 +65,7 @@ $ yarn
 $ yarn start
 ```
 
-## :bangbang: &nbsp;&nbsp;&nbsp; Informações
+## :bell: &nbsp;&nbsp;&nbsp; Informações
 - Foi criado um layout simples do sistema através da plataforma Figma tendo como base os requisitos propostos. O link consta na sessão `Links Úteis`.
 - O layout foi desenvolvido de forma a ser responsivo, adaptando-se em telas tanto de computadores como smartphones.
 - Foi utilizado para o gerenciamento de estado da aplicação o `Context API`, padrão do react, através da criação de `hooks` dedicados.
@@ -80,22 +80,25 @@ $ yarn start
   - Entre outros;
 - Pelo fato de a aplicação utilizar a API do localStorage para persistência de dados, houve a necessidade de implementar requisições a API externas como forma de demonstração de conhecimento, logo foi utilizada a consulta a API pública do IBGE para montar o combo de estados e cidade no cadastro de pessoas.
 
-## :bangbang: &nbsp;&nbsp;&nbsp; Diagramas
+## :page_with_curl: &nbsp;&nbsp;&nbsp; Diagramas
 - Mediante os requisitos descritos no documento para a elaboração do sistema foi desenvolvido o seguinte fluxograma de funcionamento do sistema elaborado.
-  - O sistema inicia quando o usuário acessa o sistema pelo navegador. A aplicação por sua vez busca no sistema de armazenamento se ja existe dado de login do usuário. Caso haja, o usuário é redirecionado para o modulo `App`, caso contrário, para o modulo `Auth`.
-<p align="center">
-<img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1612148268/projetos/teste-front-pulse/inicio_zyp74c.png" />
-</p>
 
-  - Ao iniciar o modulo `Auth`, o usuário tem a opção de acessar as duas telas: `Login` e `Criar conta`.
+#### Início
+- O sistema inicia quando o usuário acessa o sistema pelo navegador. A aplicação por sua vez busca no sistema de armazenamento se ja existe dado de login do usuário. Caso haja, o usuário é redirecionado para o modulo `App`, caso contrário, para o modulo `Auth`.
+
+<img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1612148268/projetos/teste-front-pulse/inicio_zyp74c.png" />
+
+#### Módulo Auth
+  - Ao iniciar o módulo `Auth`, o usuário tem a opção de acessar as duas telas: `Login` e `Criar conta`.
   - Caso, na tela de `Criar conta`, o usuário informe os dados para cadastro e esses dados estiverem inválidos, o campo que possui o dado inválido ficará com as bordas vermelhas e a mensagem de validação aparecerá também em vermelho.
   - Caso os dados estejam certo, o novo registo é inserido no banco de dados (localStorage), uma mensagem de sucesso aparecerá e apos fecha-la, este será redirecionado para a tela `Login`.
   - Caso, na tela `Login`, o usuário informe os dados para acessar o sistema e estes dados estejam errados ou não existam correspondência no banco uma mensagem de erro aparece informando o ocorrido.
   - Caso os dados estejam certos, é verificado se a opção `Lembrar de mim.` foi selecionada. Caso tenha sido selecionada, os dados de registo do usuário será salvo tanto no localStorage quanto no sessionStorage, caso contrário, o dado será salvo apenas no sessionStorage.
-  - Após a inserção, o usuário é redirecionado para a tela `Bem-Vindo` iniciando o modulo `App`.
+  - Após a inserção, o usuário é redirecionado para a tela `Bem-Vindo` iniciando o módulo `App`.
 
 <img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1612148268/projetos/teste-front-pulse/modulo_auth_z5adjf.png" />
 
+#### Módulo App
 - Ao iniciar o modulo `App`, a lista de pessoas salvas no banco (localStorage) é requisitada e os registros retornados são utilizados para montar a tabela de `Pessoas Cadastradas`.
 - A tela `Bem-Vindo`, por usa vez, possibilita o usuário realizar as seguintes operações:
   - "Deslogar" (Botão `Sair` no canto superior esquerdo);
@@ -113,7 +116,7 @@ $ yarn start
 
 <img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1612148268/projetos/teste-front-pulse/modulo_app_umfg3k.png" />
 
-## :bangbang: &nbsp;&nbsp;&nbsp; Requisitos
+## 	:white_check_mark: &nbsp;&nbsp;&nbsp; Requisitos
 - Abaixo segue a lista de requisitos propostos para a elaboração do projeto. O checkbox marcado significa que o requisito foi cumprido.
 
 - [x] - 1. O usuário não logado, deve poder entrar na tela de login para digitar suas
@@ -122,7 +125,7 @@ $ yarn start
 - [x] - 2. Se o usuário, na tela de login, tentar autenticar com um dado que não exista
    no localstorage, deverá ver os inputs com a borda vermelha e o texto
    correspondente ao input com a mensagem de erro;
-   - Requisito implementado no cadastro de usuário e no cadastro de pessoas, pois não é valido identificar o campo com erro ao realizar uma operação como logar no sistema. Ao tentar realizar o login e ocorrer um erro uma mensagem de erro em um popup indica a falha.
+   - `Requisito implementado no cadastro de usuário e no cadastro de pessoas, pois não é valido identificar o campo com erro ao realizar uma operação como logar no sistema. Ao tentar realizar o login e ocorrer um erro uma mensagem de erro em um popup indica a falha.`
 
 - [x] - 3. Se não existir dados, o usuário deve ver um botão de "criar conta" conforme
    layout;
@@ -139,7 +142,7 @@ $ yarn start
 - [x] - 7. Cada card da lista, deve ter as opções de excluir e editar conforme layout;
 
 - [x] - 8. A listagem de usuário deve possuir um scroll;
-  - Requisito implementado com paginação na tabela de listagem de pessoas.
+  - `Requisito implementado com paginação na tabela de listagem de pessoas.`
 
 - [x] - 9. Na tela de home, ao clicar em um card de uma pessoa, redirecionar para a
    página de edição, juntamente com os dados;
@@ -169,7 +172,7 @@ $ yarn start
  - Layout desenvolvido para este projeto na plataforma Figma: [Layout](https://www.figma.com/file/KrxVquQvClElMagRTWHM2a/pulse-teste-front?node-id=0%3A1)
 
 ## :memo: &nbsp;&nbsp;&nbsp; Licença
-Este projeto está sob a licença do MIT. Veja [LICENSE](https://github.com/mac-alves/pulse-teste-front/blob/main/LICENSE) for more information.
+Este projeto está sob a licença do MIT. Veja [LICENSE](https://github.com/mac-alves/pulse-teste-front/blob/main/LICENSE) para maiores informações.
 
 ---
 
