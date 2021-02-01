@@ -44,6 +44,12 @@ export const Card = styled.div<CardProps>`
   justify-content: flex-start;
   align-items: center;
 
+  transition: all 0.5s ease-in-out;
+  animation: 0.3s ease-in-out;
+  animation-delay: 0.3;
+  animation-name: ${props =>
+    props.position === 'topRight' ? 'toRight;' : 'toLeft;'};
+
   &.button {
     &:hover {
       transform: scale(1.01);
@@ -97,6 +103,11 @@ export const Image = styled.img`
   max-width: 179px;
   margin: 30px 0 20px 0;
   cursor: pointer;
+
+  transition: all 0.5s ease-in-out;
+  animation: 0.3s ease-in-out;
+  animation-delay: 0.3;
+  animation-name: up;
 `
 
 export const Title = styled.div`

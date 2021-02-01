@@ -2,6 +2,56 @@ import { createGlobalStyle } from 'styled-components'
 import { DEVICE } from '../utils'
 
 export default createGlobalStyle`
+
+  @keyframes toLeft {
+      from {
+          opacity: 0;
+          transform: translateX(2rem);
+      }
+      to {
+          opacity: 1;
+      }
+  }
+
+  @keyframes up {
+      from {
+          opacity: 0;
+          transform: translateY(2rem);
+      }
+      to {
+          opacity: 1;
+      }
+  }
+
+  @keyframes toRight {
+      from {
+          opacity: 0;
+          transform: translateX(-2rem);
+      }
+      to {
+          opacity: 1;
+      }
+  }
+
+  @keyframes logo {
+      from {
+          opacity: 0;
+          transform: scale(0.7);
+      }
+      to {
+          opacity: 1;
+      }
+  }
+
+  @keyframes rotate {
+      from {
+          transform: rotate(0deg);
+      }
+      to {
+          transform: rotate(360deg);
+      }
+  }
+
   * {
     padding: 0;
     margin: 0;

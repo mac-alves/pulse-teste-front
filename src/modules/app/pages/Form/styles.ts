@@ -11,6 +11,11 @@ export const Back = styled.div`
   justify-content: flex-start;
   align-items: center;
 
+  transition: all 0.5s ease-in-out;
+  animation: 0.3s ease-in-out;
+  animation-delay: 0.3;
+  animation-name: toLeft;
+
   &:hover {
     transform: scale(1.01);
   }
@@ -65,11 +70,21 @@ export const Files = styled.div`
     width: 100%;
     margin-bottom: 10px;
   }
+
+  transition: all 0.5s ease-in-out;
+  animation: 0.3s ease-in-out;
+  animation-delay: 0.3;
+  animation-name: toRight;
 `
 
 export const Fields = styled.div`
   width: 100%;
   margin-left: 20px;
+
+  transition: all 0.5s ease-in-out;
+  animation: 0.3s ease-in-out;
+  animation-delay: 0.3;
+  animation-name: toLeft;
 
   @media ${DEVICE.mobileL} {
     margin-left: 0px;

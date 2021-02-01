@@ -6,6 +6,11 @@ export const Container = styled.div`
   width: calc(100% - 100px);
   overflow-x: auto;
 
+  transition: all 0.5s ease-in-out;
+  animation: 0.4s ease-in-out;
+  animation-delay: 0.4;
+  animation-name: up;
+
   @media ${DEVICE.mobileL} {
     width: calc(100% - 30px);
   }

@@ -41,6 +41,11 @@ export const Card = styled.div<TypeInfo>`
       : '#bfbe1d'};
   display: flex;
 
+  transition: all 0.5s ease-in-out;
+  animation: 0.3s ease-in-out;
+  animation-delay: 0.3;
+  animation-name: up;
+
   @media ${DEVICE.mobileL} {
     width: calc(100% - 15px);
   }

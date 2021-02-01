@@ -11,6 +11,11 @@ export const Container = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
 
+  transition: all 0.5s ease-in-out;
+  animation: 0.3s ease-in-out;
+  animation-delay: 0.3;
+  animation-name: up;
+
   @media ${DEVICE.mobileL} {
     width: calc(100vw - 20px);
     height: initial;
@@ -71,6 +76,11 @@ export const Division = styled.div`
 `
 
 export const Banner = styled(Division)`
+  transition: all 0.5s ease-in-out;
+  animation: 0.4s ease-in-out;
+  animation-delay: 0.4;
+  animation-name: toLeft;
+
   @media ${DEVICE.mobileL} {
     display: none;
   }
@@ -83,11 +93,21 @@ export const Logo = styled.img`
   height: auto;
   max-width: 179px;
   margin-bottom: 15px;
+
+  transition: all 0.5s ease-in-out;
+  animation: 0.4s ease-in-out;
+  animation-delay: 0.4;
+  animation-name: toLeft;
 `
 
 export const Form = styled(FormWeb)`
   width: 100%;
   padding: 0px 30px;
+
+  transition: all 0.5s ease-in-out;
+  animation: 0.5s ease-in-out;
+  animation-delay: 0.5;
+  animation-name: toLeft;
 
   @media ${DEVICE.mobileL} {
     padding: 0px 15px;
@@ -103,10 +123,14 @@ export const Submit = styled.button`
   font-size: 16px;
   font-weight: bold;
   color: white;
-  transition: all 0.3s linear;
   cursor: pointer;
   margin-bottom: 10px;
   border-radius: 7px;
+
+  transition: all 0.5s ease-in-out;
+  animation: 0.5s ease-in-out;
+  animation-delay: 0.5;
+  animation-name: toLeft;
 
   &:hover {
     transform: scale(1.01);
@@ -125,6 +149,11 @@ export const OtherOption = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: all 0.5s ease-in-out;
+  animation: 0.6s ease-in-out;
+  animation-delay: 0.6;
+  animation-name: toLeft;
 
   p {
     font-style: normal;
