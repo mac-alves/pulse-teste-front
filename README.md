@@ -1,6 +1,6 @@
-<!-- <h1 align="center">
-  <img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1603655086/projetos/auth-rmi_lfncqx.png" width="400" />
-</h1> -->
+<h1 align="center">
+  <img alt="Auth-RMI" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1612200369/projetos/teste-front-pulse/pulse-teste-front_z0rdpf.gif" width="800" />
+</h1>
 
 <h1 align="center">
   Teste Front-End @Pulse
