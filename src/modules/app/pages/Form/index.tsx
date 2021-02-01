@@ -3,8 +3,9 @@ import { OptionTypeBase } from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { RiUserShared2Line } from 'react-icons/ri'
 import { IoMdArrowBack } from 'react-icons/io'
+import PersonService from '../../services/LocalStorage'
 import { Axios } from '../../../../shared/axios'
-import { useAuth } from '../../../auth/contexts/auth'
+import { useAuth } from '../../../auth/contexts/Auth'
 
 import Input from '../../../../shared/components/Form/Input'
 import Select from '../../../../shared/components/Form/Select'
@@ -22,7 +23,6 @@ import ImageInput from '../../../../shared/components/Form/ImageInput'
 
 import * as Yup from 'yup'
 import { CustomErrorRequest } from '../../../../shared/errors'
-import { usePerson } from '../../contexts/person'
 import AuthRoutes from '../../../auth/paths.routes'
 import AppRoutes from '../../paths.routes'
 import { Person } from '../../interfaces'
@@ -57,7 +57,6 @@ const Form: React.FC = () => {
   const modalRef = useRef<ModalHandles>(null)
   const history = useHistory()
   const { singOut } = useAuth()
-  const { savePerson, getPerson } = usePerson()
   const [loading, setLoading] = useState(false)
 
   const [ufs, setUfs] = useState<OptionTypeBase[]>([])
@@ -107,7 +106,7 @@ const Form: React.FC = () => {
         image = await toBase64(dataForm.img)
       }
 
-      const code = await savePerson(id, {
+      const code = await PersonService.save(id, {
         name: dataForm.name,
         age: dataForm.age,
         uf: dataForm.uf,
@@ -231,7 +230,7 @@ const Form: React.FC = () => {
   useEffect(() => {
     if (id) {
       ;(async () => {
-        const person = await getPerson(id)
+        const person = await PersonService.get(id)
         setPersonToEdit(person)
       })()
     }

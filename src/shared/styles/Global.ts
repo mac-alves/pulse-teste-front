@@ -33,25 +33,6 @@ export default createGlobalStyle`
       }
   }
 
-  @keyframes logo {
-      from {
-          opacity: 0;
-          transform: scale(0.7);
-      }
-      to {
-          opacity: 1;
-      }
-  }
-
-  @keyframes rotate {
-      from {
-          transform: rotate(0deg);
-      }
-      to {
-          transform: rotate(360deg);
-      }
-  }
-
   * {
     padding: 0;
     margin: 0;

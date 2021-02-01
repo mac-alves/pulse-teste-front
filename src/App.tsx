@@ -1,11 +1,11 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import GlobalStyle from './shared/styles/global'
-import theme from './shared/styles/theme'
+import GlobalStyle from './shared/styles/Global'
+import theme from './shared/styles/Theme'
 
-import Routes from './routes'
-import { AuthProvider } from './modules/auth/contexts/auth'
+import Routes from './Routes'
+import { AuthProvider } from './modules/auth/contexts/Auth'
 
 const App: React.FC = () => {
   return (

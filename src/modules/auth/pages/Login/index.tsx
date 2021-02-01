@@ -22,7 +22,7 @@ import SecurityInput from '../../../../shared/components/Form/SecurityInput'
 
 import LogoImage from '../../../../assets/images/logo.png'
 import BannerLoginImage from '../../../../assets/images/banner-login.svg'
-import { useAuth } from '../../contexts/auth'
+import { useAuth } from '../../contexts/Auth'
 import AppRoutes from '../../../app/paths.routes'
 import MessageModal, {
   ModalHandles

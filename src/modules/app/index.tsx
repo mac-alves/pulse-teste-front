@@ -8,22 +8,19 @@ import FormApp from './pages/Form'
 import NotFound from '../../shared/pages/NotFound'
 
 import { Container } from './styles'
-import { PersonProvider } from './contexts/person'
 
 const AppModule: React.FC = () => {
   return (
     <BrowserRouter>
       <Container>
-        <PersonProvider>
-          <Switch>
-            <Route exact path={AppRoutes.HOME} component={HomeApp} />
-            <Route path={AppRoutes.PERSON.edite} component={FormApp} />
-            <Route path={AppRoutes.PERSON.create} component={FormApp} />
-            <Route path="*">
-              <NotFound />
-            </Route>
-          </Switch>
-        </PersonProvider>
+        <Switch>
+          <Route exact path={AppRoutes.HOME} component={HomeApp} />
+          <Route path={AppRoutes.PERSON.edite} component={FormApp} />
+          <Route path={AppRoutes.PERSON.create} component={FormApp} />
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
       </Container>
     </BrowserRouter>
   )

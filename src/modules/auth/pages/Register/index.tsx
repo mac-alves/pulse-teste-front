@@ -22,7 +22,7 @@ import MessageModal, { ModalHandles } from '../../../../shared/components/ui/Mes
 import LogoImage from '../../../../assets/images/logo.png'
 import BannerRegisterImage from '../../../../assets/images/banner-register.svg'
 
-import { useAuth } from '../../contexts/auth'
+import { useAuth } from '../../contexts/Auth'
 import * as Yup from 'yup'
 import { CustomErrorRequest } from '../../../../shared/errors'
 import { useHistory } from 'react-router-dom'

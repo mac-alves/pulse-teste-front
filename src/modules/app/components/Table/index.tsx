@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import PersonService from '../../services/LocalStorage'
 
 import { Title } from '../../styles'
 import {
@@ -13,7 +14,7 @@ import {
   Plus,
   Container
 } from './styles'
-import { usePerson } from '../../contexts/person'
+import { useHome } from '../../contexts/Home'
 import AppRoutes from '../../paths.routes'
 import { Person } from '../../interfaces'
 import TableItem from '../TableItem'
@@ -33,7 +34,8 @@ interface Props {
 }
 
 const Table: React.FC<Props> = ({ limitRow = 4, className }) => {
-  const { persons } = usePerson()
+  const { updateData } = useHome()
+  const [persons, setPersons] = useState<Person[]>([])
 
   const [table, setTable] = useState<TableInfo>({
     initialList: [],
@@ -84,6 +86,15 @@ const Table: React.FC<Props> = ({ limitRow = 4, className }) => {
       })
     }
   }
+
+  const getPersons = useCallback(async () => {
+    const persons = await PersonService.getAll()
+    setPersons(persons)
+  }, [])
+
+  useEffect(() => {
+    getPersons()
+  }, [updateData])
 
   useEffect(() => {
     setTable(() => {

@@ -1,9 +1,4 @@
-export interface Person {
-  id?: string
-  img: string | ArrayBuffer | null
-  name: string
-  uf: string
-  city: string
-  age: number
-  role: string
-}
+import Person from './Person'
+import PersonService from './PersonService'
+
+export type { Person, PersonService }

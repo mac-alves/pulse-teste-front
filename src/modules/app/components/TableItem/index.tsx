@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React, { useCallback, useRef } from 'react'
+import PersonService from '../../services/LocalStorage'
 import { IoMdTrash } from 'react-icons/io'
 import { FaUserAlt } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
 
 import { Delete, Edite, ImageUser } from './styles'
 import { useHistory } from 'react-router-dom'
-import { usePerson } from '../../contexts/person'
+import { useHome } from '../../contexts/Home'
 import { Person } from '../../interfaces'
 import AppRoutes from '../../paths.routes'
 import ConfirmationModal, {
@@ -19,12 +20,13 @@ interface Props {
 
 const TableItem: React.FC<Props> = ({ item }) => {
   const modalRef = useRef<ModalHandles>(null)
-  const { deletePerson } = usePerson()
+  const { setUpdateData } = useHome()
   const history = useHistory()
 
-  const handleDelete = useCallback((id: string | undefined) => {
+  const handleDelete = useCallback(async (id: string | undefined) => {
     if (id) {
-      deletePerson(id)
+      await PersonService.delete(id)
+      setUpdateData(state => !state)
     }
   }, [])
 
