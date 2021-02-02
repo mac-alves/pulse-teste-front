@@ -21,17 +21,18 @@ type InputProps = JSX.IntrinsicElements['input'] & Props
 
 const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const file = useRef({ value: '' })
   const { fieldName, registerField, error } = useField(name)
   const [preview, setPreview] = useState<string | undefined>(UserImg)
   const [classAnimate, setClassAnimate] = useState('')
 
-  function animateImg() {
+  const animateImg = useCallback(() => {
     if (classAnimate === '') {
       setClassAnimate('did-fade-in')
     } else {
       setClassAnimate('')
     }
-  }
+  }, [classAnimate])
 
   const handlePreview = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
@@ -44,9 +45,9 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
       const previewURL = URL.createObjectURL(file)
       setPreview(previewURL)
     }
-  }, [])
+  }, [preview])
 
-  const dataURLtoFile = (dataURL: string) => {
+  const dataURLtoFile = useCallback((dataURL: string) => {
     const arr = dataURL.split(',')
     const toMime = arr[0].match(/:(.*?);/)
     const mime = toMime ? toMime[1] : 'image/png'
@@ -59,7 +60,7 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
     }
 
     return new File([u8arr], 'user-image', { type: mime })
-  }
+  }, [])
 
   useEffect(() => {
     registerField({
@@ -69,10 +70,13 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
         if (ref.files.length > 0) {
           return ref.files[0]
         }
-        console.log('preview', preview)
 
         if (preview && preview.search('data:') !== -1) {
           return dataURLtoFile(preview)
+        }
+
+        if (file.current.value && file.current.value.search('data:') !== -1) {
+          return dataURLtoFile(file.current.value)
         }
 
         return null
@@ -83,6 +87,7 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
       },
       setValue(_: HTMLInputElement, value: string) {
         if (value) {
+          file.current.value = value
           setPreview(value)
         }
       }
