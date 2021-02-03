@@ -43,11 +43,13 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 -  [Eslint](https://eslint.org/)
 -  [Prettier](https://prettier.io/)
 -  [LocalStorage](https://developer.mozilla.org/pt-BR/docs/Web/API/Window/Window.localStorage)
+-  [Docker](https://www.docker.com/)
 -  [VS Code][vc] with [EditorConfig][vceditconfig]
 
 ## :bangbang: &nbsp;&nbsp;&nbsp; Dependencies
 - [Git](https://git-scm.com),
 - [Node.js v12.16.1][nodejs] + [YARN v1.22.4][yarn]
+- [Docker v20.10.2](https://www.docker.com/)
 
 ## :information_source: &nbsp;&nbsp;&nbsp; Como usar
 
@@ -63,6 +65,11 @@ $ yarn
 
 # Execute o projeto
 $ yarn start
+
+# ---- Execução do projeto no docker --------
+
+# Execute o comando
+$ sudo docker-compose up --build
 ```
 
 ## :bell: &nbsp;&nbsp;&nbsp; Informações
