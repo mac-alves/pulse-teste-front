@@ -68,8 +68,11 @@ $ yarn start
 
 # ---- Execução do projeto no docker --------
 
-# Execute o comando
+# Compilar e executar
 $ sudo docker-compose up --build
+
+# Executar após compilado
+$ sudo docker-compose up
 ```
 
 ## :bell: &nbsp;&nbsp;&nbsp; Informações
