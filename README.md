@@ -135,7 +135,7 @@ $ sudo docker-compose up
 - [x] - 2. Se o usuário, na tela de login, tentar autenticar com um dado que não exista
    no localstorage, deverá ver os inputs com a borda vermelha e o texto
    correspondente ao input com a mensagem de erro;
-   - `Requisito implementado no cadastro de usuário e no cadastro de pessoas, pois não é valido identificar o campo com erro ao realizar uma operação como logar no sistema. Ao tentar realizar o login e ocorrer um erro uma mensagem de erro em um popup indica a falha.`
+   - `Requisito implementado no cadastro de usuário e no cadastro de pessoas, pois não é válido identificar o campo com erro ao realizar uma operação como logar no sistema. Ao tentar realizar o login e ocorrer algum erro, uma mensagem em um popup indica a falha.`
 
 - [x] - 3. Se não existir dados, o usuário deve ver um botão de "criar conta" conforme
    layout;
